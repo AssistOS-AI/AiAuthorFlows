@@ -4,7 +4,6 @@ export class SuggestAbstract {
     constructor() {
         this.name = "SuggestAbstract";
         this.description = "Suggests an abstract based on the current document";
-        this.tags = ["documents", "agents", "presenters"];
     }
 
     start(documentId, prompt, maxTokens) {

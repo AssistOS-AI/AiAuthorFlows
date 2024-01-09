@@ -4,7 +4,6 @@ export class AddDocument {
     constructor() {
         this.name = "AddDocument";
         this.description = "Adds a new document";
-        this.tags = ["presenters", "agents", "documents"];
         this.agentConfigs = {
             description: "Adds a new document. All the information needed is just its title and its topic. The topic should be no longer than a sentence",
             parameters: [
