@@ -4,7 +4,6 @@ export class DeleteAlternativeAbstract {
     constructor() {
         this.name = "DeleteAlternativeAbstract";
         this.description = "Deletes an alternative abstract";
-        this.tags = ["presenters", "agents", "documents"];
     }
 
     async start(documentId, alternativeAbstractId) {

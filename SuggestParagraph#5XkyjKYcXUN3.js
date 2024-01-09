@@ -4,7 +4,6 @@ export class SuggestParagraph {
     constructor() {
         this.name = "SuggestParagraph";
         this.description = "Suggests a paragraph based on the current chapter";
-        this.tags = ["documents", "agents", "presenters"];
     }
 
     start(documentId, chapterId, paragraphId, prompt, maxTokens) {

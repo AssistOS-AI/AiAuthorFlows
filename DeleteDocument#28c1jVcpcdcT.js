@@ -4,7 +4,6 @@ export class DeleteDocument {
     constructor() {
         this.name = "DeleteDocument";
         this.description = "Deletes a document";
-        this.tags = ["presenters", "agents", "documents"];
     }
 
     async start(documentId) {

@@ -4,7 +4,6 @@ export class AddParagraph {
     constructor() {
         this.name = "AddParagraph";
         this.description = "Adds a new paragraph to a chapter";
-        this.tags = ["presenters", "agents", "documents"];
     }
 
     async start(documentId, chapterId) {
