@@ -23,7 +23,7 @@ export class GenerateDocument {
     }
 
     async generateSchema(title, topic, chaptersCount, personalityPrompt) {
-        const documentSchemaPrompt = `${personalityPrompt || ""}Please generate a schema for a document. The topic of this document is ${topic} and it should have ${chaptersCount} chapters. The title is ${title}. The schema should have the following format: {\"title\": \"Title of the document\",\"chapters\": [${this.countChapters(chaptersCount)}]}`;
+        const documentSchemaPrompt = `${personalityPrompt || ""}Please generate a schema for a document. The topic of this document is ${topic} and it should have ${chaptersCount} chapters. The title is ${title}. The schema should have the following format: {\"title\": \"Title of the document\",\"chapters\": [${countChapters(chaptersCount)}]}`;
 
         function countChapters(chaptersCount) {
             let chapters = '';
