@@ -1,9 +1,7 @@
 export class DeleteChapter {
     static id = "2BDPLeWZ2cuQ";
-
+    static description = "Deletes a chapter";
     constructor() {
-        this.name = "DeleteChapter";
-        this.description = "Deletes a chapter";
     }
 
     async start(documentId, chapterId) {

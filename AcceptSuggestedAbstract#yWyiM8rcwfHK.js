@@ -1,9 +1,8 @@
 export class AcceptSuggestedAbstract {
     static id = "yWyiM8rcwfHK";
+    static description = "Adds an alternative abstract to the list";
 
     constructor() {
-        this.name = "AcceptSuggestedAbstract";
-        this.description = "Adds an alternative abstract to the list";
     }
 
     async start(documentId, abstract) {

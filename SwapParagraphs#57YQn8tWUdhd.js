@@ -1,9 +1,8 @@
 export class SwapParagraphs {
     static id = "57YQn8tWUdhd";
+    static description = "Swaps the order of 2 paragraphs";
 
     constructor() {
-        this.name = "SwapParagraphs";
-        this.description = "Swaps the order of 2 paragraphs";
     }
 
     async start(documentId, chapterId, paragraphId1, paragraphId2) {

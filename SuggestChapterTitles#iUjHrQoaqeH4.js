@@ -1,9 +1,8 @@
 export class SuggestChapterTitles {
     static id = "iUjHrQoaqeH4";
+    static description = "Generates n chapter titles";
 
     constructor() {
-        this.name = "SuggestChapterTitles";
-        this.description = "Generates n chapter titles";
     }
 
     start(documentId, chapterId, prompt, titlesNr, maxTokens) {

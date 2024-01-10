@@ -1,9 +1,8 @@
 export class GenerateEmptyChapters {
     static id = "4eN7RkfHwzqt";
+    static description = "Generates only the titles based on some ideas.";
 
     constructor() {
-        this.name = "GenerateEmptyChapters";
-        this.description = "Generates only the titles based on some ideas.";
     }
 
     start(ideas, documentId, prompt, chaptersNr) {

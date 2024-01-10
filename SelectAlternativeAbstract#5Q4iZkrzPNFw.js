@@ -1,9 +1,8 @@
 export class SelectAlternativeAbstract {
     static id = "5Q4iZkrzPNFw";
+    static description = "Swaps an alternative abstract with the current one";
 
     constructor() {
-        this.name = "SelectAlternativeAbstract";
-        this.description = "Swaps an alternative abstract with the current one";
     }
 
     async start(documentId, alternativeAbstractId) {

@@ -1,9 +1,8 @@
 export class CloneDocument {
     static id = "2xMkntPX8k3k";
+    static description = "The second iteration of the clone document script";
 
     constructor() {
-        this.name = "CloneDocument";
-        this.description = "The second iteration of the clone document script";
     }
 
     async start(documentId, personalityId, newTitle, proofread) {

@@ -1,9 +1,8 @@
 export class CloneChapter {
     static id = "gPf5GHPH6zmd";
+    static description = "Creates an alternative for a chapter using a personality, using proofread if specified";
 
     constructor() {
-        this.name = "CloneChapter";
-        this.description = "Creates an alternative for a chapter using a personality, using proofread if specified";
     }
 
     async start(documentId, chapterId, personalityId, newTitle, proofread) {

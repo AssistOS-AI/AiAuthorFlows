@@ -1,9 +1,8 @@
 export class DeleteAlternativeDocumentTitle {
     static id = "3iFbKMFaRAYC";
+    static description = "Deletes an alternative title";
 
     constructor() {
-        this.name = "DeleteAlternativeDocumentTitle";
-        this.description = "Deletes an alternative title";
     }
 
     async start(documentId, alternativeTitleId) {

@@ -1,9 +1,8 @@
 export class GenerateChapters {
     static id = "2Piuqy6QAW4s";
+    static description = "Generates chapters based on some ideas";
 
     constructor() {
-        this.name = "GenerateChapters";
-        this.description = "Generates chapters based on some ideas";
     }
 
     async start(ideas, documentId, prompt, chapterNr) {

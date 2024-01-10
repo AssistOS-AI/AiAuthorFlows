@@ -1,9 +1,8 @@
 export class GenerateDocument {
     static id = "2YTE3bfaUGsu";
+    static description = "Generates a whole document based on: a title, a topic, number of chapters";
 
     constructor() {
-        this.name = "GenerateDocument";
-        this.description = "Generates a whole document based on: a title, a topic, number of chapters";
     }
 
     async start(title, topic, chaptersCount, personalityId, maxTokens) {

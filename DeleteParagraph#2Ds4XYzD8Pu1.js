@@ -1,9 +1,8 @@
 export class DeleteParagraph {
     static id = "2Ds4XYzD8Pu1";
+    static description = "Deletes a paragraph";
 
     constructor() {
-        this.name = "DeleteParagraph";
-        this.description = "Deletes a paragraph";
     }
 
     async start(documentId, chapterId, paragraphId) {

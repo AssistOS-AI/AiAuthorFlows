@@ -1,9 +1,8 @@
 export class SelectAlternativeChapterTitle {
     static id = "29ytbpyo3cWu";
+    static description = "Swaps an alternative title with the current one";
 
     constructor() {
-        this.name = "SelectAlternativeChapterTitle";
-        this.description = "Swaps an alternative title with the current one";
     }
 
     async start(documentId, chapterId, alternativeTitleId) {

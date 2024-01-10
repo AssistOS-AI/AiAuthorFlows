@@ -1,9 +1,8 @@
 export class UpdateParagraphMainIdea {
     static id = "3PHrt2Mciabk";
+    static description = "Updates the main idea of a paragraph";
 
     constructor() {
-        this.name = "UpdateParagraphMainIdea";
-        this.description = "Updates the main idea of a paragraph";
     }
 
     async start(documentId, chapterId, paragraphId, idea) {

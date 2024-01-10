@@ -1,9 +1,8 @@
 export class UpdateParagraphText {
     static id = "31NKgxUUAKup";
+    static description = "Updates the text of a paragraph";
 
     constructor() {
-        this.name = "UpdateParagraphText";
-        this.description = "Updates the text of a paragraph";
     }
 
     async start(documentId, chapterId, paragraphId, text) {

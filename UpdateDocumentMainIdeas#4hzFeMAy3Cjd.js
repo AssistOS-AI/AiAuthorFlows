@@ -1,9 +1,8 @@
 export class UpdateDocumentMainIdeas {
     static id = "4hzFeMAy3Cjd";
+    static description = "Updates the main ideas of a document";
 
     constructor() {
-        this.name = "UpdateDocumentMainIdeas";
-        this.description = "Updates the main ideas of a document";
     }
 
     async start(documentId, ideas) {

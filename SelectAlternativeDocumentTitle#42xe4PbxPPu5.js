@@ -1,9 +1,8 @@
 export class SelectAlternativeDocumentTitle {
     static id = "42xe4PbxPPu5";
+    static description = "Swaps an alternative document title with the current one";
 
     constructor() {
-        this.name = "SelectAlternativeDocumentTitle";
-        this.description = "Swaps an alternative document title with the current one";
     }
 
     async start(documentId, alternativeTitleId) {
