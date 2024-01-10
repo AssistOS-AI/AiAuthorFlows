@@ -1,9 +1,8 @@
 export class DeleteAlternativeAbstract {
     static id = "5MML33FYWBM8";
+    static description = "Deletes an alternative abstract";
 
     constructor() {
-        this.name = "DeleteAlternativeAbstract";
-        this.description = "Deletes an alternative abstract";
     }
 
     async start(documentId, alternativeAbstractId) {

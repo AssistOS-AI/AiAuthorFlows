@@ -1,9 +1,8 @@
 export class GenerateParagraphs {
     static id = "UikYz7YD2wCm";
+    static description = "Generates paragraphs based on some ideas";
 
     constructor() {
-        this.name = "GenerateParagraphs";
-        this.description = "Generates paragraphs based on some ideas";
     }
 
     async start(title, topic, chaptersCount, personalityId, maxTokens) {

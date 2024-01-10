@@ -1,9 +1,8 @@
 export class GenerateIdeas {
     static id = "5FbELFMbvKga";
+    static description = "Generates n ideas based on a hint";
 
     constructor() {
-        this.name = "GenerateIdeas";
-        this.description = "Generates n ideas based on a hint";
     }
 
     async start(topic, personalityId, variants, maxTokens) {

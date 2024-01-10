@@ -1,9 +1,8 @@
 export class SelectAlternativeParagraph {
     static id = "53HmewhG2Jqh";
+    static description = "Swaps a paragraph with an alternative";
 
     constructor() {
-        this.name = "SelectAlternativeParagraph";
-        this.description = "Swaps a paragraph with an alternative";
     }
 
     async start(documentId, chapterId, paragraphId, alternativeParagraphId) {

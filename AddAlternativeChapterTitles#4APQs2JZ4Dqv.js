@@ -1,9 +1,8 @@
 export class AddAlternativeChapterTitles {
     static id = "4APQs2JZ4Dqv";
+    static description = "Adds selected chapter titles to the alternatives list";
 
     constructor() {
-        this.name = "AddAlternativeChapterTitles";
-        this.description = "Adds selected chapter titles to the alternatives list";
     }
 
     async start(documentId, chapterId, selectedTitles) {

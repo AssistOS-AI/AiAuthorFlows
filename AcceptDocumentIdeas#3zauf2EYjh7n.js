@@ -1,9 +1,8 @@
 export class AcceptDocumentIdeas {
     static id = "3zauf2EYjh7n";
+    static description = "Replaces the current main ideas with the generated ones";
 
     constructor() {
-        this.name = "AcceptDocumentIdeas";
-        this.description = "Replaces the current main ideas with the generated ones";
     }
 
     async start(documentId, ideas) {

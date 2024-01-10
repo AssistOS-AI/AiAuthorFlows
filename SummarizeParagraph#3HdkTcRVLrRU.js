@@ -1,9 +1,8 @@
 export class SummarizeParagraph {
     static id = "3HdkTcRVLrRU";
+    static description = "Summarize paragraph";
 
     constructor() {
-        this.name = "SummarizeParagraph";
-        this.description = "Summarize paragraph";
     }
 
     async start(documentId, chapterId, paragraphId, prompt, maxTokens) {

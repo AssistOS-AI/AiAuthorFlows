@@ -1,9 +1,8 @@
 export class DeleteDocument {
     static id = "28c1jVcpcdcT";
+    static description = "Deletes a document";
 
     constructor() {
-        this.name = "DeleteDocument";
-        this.description = "Deletes a document";
     }
 
     async start(documentId) {

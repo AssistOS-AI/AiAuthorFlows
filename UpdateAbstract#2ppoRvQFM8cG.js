@@ -1,9 +1,8 @@
 export class UpdateAbstract {
     static id = "2ppoRvQFM8cG";
+    static description = "Updates the abstract of a document";
 
     constructor() {
-        this.name = "UpdateAbstract";
-        this.description = "Updates the abstract of a document";
     }
 
     async start(documentId, text) {

@@ -1,9 +1,7 @@
 export class UpdateChapterTitle {
     static id = "2FkpqCvy1bki";
-
+    static description = "Updates the title of a chapter";
     constructor() {
-        this.name = "UpdateChapterTitle";
-        this.description = "Updates the title of a chapter";
     }
 
     async start(documentId, chapterId, newTitle) {

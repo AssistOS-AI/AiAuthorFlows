@@ -1,9 +1,8 @@
 export class SuggestChapter {
     static id = "53yfKt5TgWdo";
+    static description = "Suggests a chapter alternative based on the current chapter";
 
     constructor() {
-        this.name = "SuggestChapter";
-        this.description = "Suggests a chapter alternative based on the current chapter";
     }
 
     start(idea) {

@@ -1,9 +1,8 @@
 export class AcceptSuggestedParagraph {
     static id = "5Hbtj7jqzHc7";
-
+    static description = "Adds a paragraph to the alternatives list";
     constructor() {
-        this.name = "AcceptSuggestedParagraph";
-        this.description = "Adds a paragraph to the alternatives list";
+
     }
 
     async start(documentId, chapterId, paragraphId, alternativeParagraph) {

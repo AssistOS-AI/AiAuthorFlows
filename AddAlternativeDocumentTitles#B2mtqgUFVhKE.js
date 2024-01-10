@@ -1,9 +1,8 @@
 export class AddAlternativeDocumentTitles {
     static id = "B2mtqgUFVhKE";
+    static description = "Adds document titles to the alternatives list";
 
     constructor() {
-        this.name = "AddAlternativeDocumentTitles";
-        this.description = "Adds document titles to the alternatives list";
     }
 
     async start(documentId, selectedTitles) {

@@ -1,9 +1,8 @@
 export class SwapChapters {
     static id = "4p7y8tRN5FTY";
+    static description = "Swaps the order of 2 chapters";
 
     constructor() {
-        this.name = "SwapChapters";
-        this.description = "Swaps the order of 2 chapters";
     }
 
     async start(documentId, chapterId1, chapterId2) {

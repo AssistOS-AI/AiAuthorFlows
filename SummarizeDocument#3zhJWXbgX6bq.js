@@ -1,9 +1,8 @@
 export class SummarizeDocument {
     static id = "3zhJWXbgX6bq";
+    static description = "Creates the main ideas of the document";
 
     constructor() {
-        this.name = "SummarizeDocument";
-        this.description = "Creates the main ideas of the document";
     }
 
     async start(documentId, prompt, maxTokens) {

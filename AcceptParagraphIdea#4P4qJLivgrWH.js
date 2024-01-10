@@ -1,9 +1,8 @@
 export class AcceptParagraphIdea {
     static id = "4P4qJLivgrWH";
+    static description = "Replaces the current main idea with the generated one";
 
     constructor() {
-        this.name = "AcceptParagraphIdea";
-        this.description = "Replaces the current main idea with the generated one";
     }
 
     async start(documentId, chapterId, paragraphId, idea) {

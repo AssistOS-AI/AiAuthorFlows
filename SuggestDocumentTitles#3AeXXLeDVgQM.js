@@ -1,9 +1,8 @@
 export class SuggestDocumentTitles {
     static id = "3AeXXLeDVgQM";
+    static description = "Generates n document titles";
 
     constructor() {
-        this.name = "SuggestDocumentTitles";
-        this.description = "Generates n document titles";
     }
 
     async start(documentId, prompt, titlesNr, maxTokens) {

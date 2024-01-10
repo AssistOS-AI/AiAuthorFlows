@@ -1,9 +1,8 @@
 export class UpdateAlternativeDocumentTitle {
     static id = "4qdF2yemHRch";
+    static description = "Updates the alternative title of a document";
 
     constructor() {
-        this.name = "UpdateAlternativeDocumentTitle";
-        this.description = "Updates the alternative title of a document";
     }
 
     async start(documentId, alternativeTitleId, text) {

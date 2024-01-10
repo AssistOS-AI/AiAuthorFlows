@@ -1,9 +1,8 @@
 export class SuggestParagraph {
     static id = "5XkyjKYcXUN3";
+    static description = "Suggests a paragraph based on the current chapter";
 
     constructor() {
-        this.name = "SuggestParagraph";
-        this.description = "Suggests a paragraph based on the current chapter";
     }
 
     start(documentId, chapterId, paragraphId, prompt, maxTokens) {

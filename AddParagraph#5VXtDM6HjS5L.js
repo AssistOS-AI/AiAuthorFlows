@@ -1,9 +1,7 @@
 export class AddParagraph {
     static id = "5VXtDM6HjS5L";
-
+    static description = "Adds a new paragraph to a chapter";
     constructor() {
-        this.name = "AddParagraph";
-        this.description = "Adds a new paragraph to a chapter";
     }
 
     async start(documentId, chapterId) {

@@ -1,9 +1,8 @@
 export class DeleteAlternativeChapter {
     static id = "2heR7cTx247z";
+    static description = "Deletes an alternative chapter";
 
     constructor() {
-        this.name = "DeleteAlternativeChapter";
-        this.description = "Deletes an alternative chapter";
     }
 
     async start(documentId, chapterId, alternativeChapterId) {

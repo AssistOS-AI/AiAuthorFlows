@@ -1,9 +1,8 @@
 export class SuggestAbstract {
     static id = "5pPdhqLZsx62";
+    static description = "Suggests an abstract based on the current document";
 
     constructor() {
-        this.name = "SuggestAbstract";
-        this.description = "Suggests an abstract based on the current document";
     }
 
     start(documentId, prompt, maxTokens) {
