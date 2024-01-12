@@ -1,11 +1,8 @@
-import {sanitize} from "../../../../../wallet/imports.js";
-
 export class AcceptChapterIdeas {
     static id = "2yUmp4bwtRR7";
     static description = "Replaces the current main ideas with the generated ones";
-
-    constructor(dependencies) {
-        const {sanitize} = dependencies;
+    static dependencies = ["sanitize"];
+    constructor(sanitize) {
         this.sanitize = sanitize;
     }
 
