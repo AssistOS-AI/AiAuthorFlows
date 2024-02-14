@@ -16,11 +16,11 @@ export class AddChapter {
             // Create chapter data
             let chapterData = {
                 title: title,
-                id: webSkel.getService("UtilsService").generateId(),
+                id: webSkel.appServices.generateId(),
                 paragraphs: [
                     {
                         text: "New Paragraph",
-                        id: webSkel.getService("UtilsService").generateId(),
+                        id: webSkel.appServices.generateId(),
                     },
                 ],
             };

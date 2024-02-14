@@ -8,7 +8,7 @@ export class AddParagraph {
         try {
             let document = webSkel.currentUser.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
-            let newParagraphId = webSkel.getService("UtilsService").generateId();
+            let newParagraphId = webSkel.appServices.generateId();
             let position = chapter.paragraphs.length;
 
             if (webSkel.currentUser.space.currentParagraphId) {
