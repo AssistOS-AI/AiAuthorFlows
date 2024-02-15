@@ -14,16 +14,19 @@ export class GenerateDocument {
         }
 
         this.setDefaultValues();
+        this.setResponseFormat("json_object");
         this.setIntelligenceLevel(3);
-        let schema = await this.generateSchema(title, topic, chaptersCount, personalityPrompt);
-        let chapters = await this.generateChapters(schema, personalityPrompt);
-        let mainIdeas = await this.generateMainIdeas(chapters, personalityPrompt);
-        let abstract = await this.generateAbstract(mainIdeas, personalityPrompt);
+        this.addSystemMessage(personalityPrompt);
+        let schema = await this.generateSchema(title, topic, chaptersCount);
+        let chapters = await this.generateChapters(schema);
+        this.setResponseFormat("text");
+        let mainIdeas = await this.generateMainIdeas(chapters);
+        let abstract = await this.generateAbstract(mainIdeas);
         await this.addDocument(title, topic, chapters, mainIdeas, abstract);
     }
 
-    async generateSchema(title, topic, chaptersCount, personalityPrompt) {
-        const documentSchemaPrompt = `${personalityPrompt || ""}Please generate a schema for a document. The topic of this document is ${topic} and it should have ${chaptersCount} chapters. The title is ${title}. The schema should have the following format: {\"title\": \"Title of the document\",\"chapters\": [${countChapters(chaptersCount)}]}`;
+    async generateSchema(title, topic, chaptersCount) {
+        const documentSchemaPrompt = `Please generate a schema for a document. The topic of this document is ${topic} and it should have ${chaptersCount} chapters. The title is ${title}. The schema should have the following format: {\"title\": \"Title of the document\",\"chapters\": [${countChapters(chaptersCount)}]}`;
 
         function countChapters(chaptersCount) {
             let chapters = '';
@@ -44,7 +47,7 @@ export class GenerateDocument {
         }
     }
 
-    async generateChapters(schema, personalityPrompt) {
+    async generateChapters(schema) {
         let generatedChapters = [];
         let previousChapters;
 
@@ -59,9 +62,7 @@ export class GenerateDocument {
                 });
                 previousChapters = `Use a logical flow in your generation and continue your writing flow using these previous chapters and their main ideas:${JSON.stringify(minimizedChapters)}.`;
             }
-
-            let generateChapterPrompt = `${personalityPrompt || ""}Please generate a chapter that is strictly related to these main ideas: ${JSON.stringify(schema.chapters[i].mainIdeas)} and this title:${schema.chapters[i].title}. ${previousChapters || ""} The chapter should have the following structure:{\"title\":\"Chapter Title\", \"mainIdeas\":[\"paragraph 1 summary\", \"paragraph 2 summary\", ... , \"paragraph n summary\"], \"paragraphs\":[{text:\"paragraph 1 text\", mainIdea:\"paragraph 1 summary\"}, {text:\"paragraph 2 text\", mainIdea:\"paragraph 2 summary\"}, ... {text:\"paragraph n text\", mainIdea:\"paragraph n summary\"}]}.`;
-
+            let generateChapterPrompt = `Please generate a chapter that is strictly related to these main ideas: ${JSON.stringify(schema.chapters[i].mainIdeas)} and this title:${schema.chapters[i].title}. ${previousChapters || ""} The chapter should have the following structure:{\"title\":\"Chapter Title\", \"mainIdeas\":[\"paragraph 1 summary\", \"paragraph 2 summary\", ... , \"paragraph n summary\"], \"paragraphs\":[{text:\"paragraph 1 text\", mainIdea:\"paragraph 1 summary\"}, {text:\"paragraph 2 text\", mainIdea:\"paragraph 2 summary\"}, ... {text:\"paragraph n text\", mainIdea:\"paragraph n summary\"}]}.`;
             let response = await this.request(generateChapterPrompt);
             try {
                 generatedChapters.push(JSON.parse(response));
@@ -69,22 +70,21 @@ export class GenerateDocument {
                 this.fail(e);
             }
         }
-
         return generatedChapters;
     }
 
-    async generateMainIdeas(chapters, personalityPrompt) {
+    async generateMainIdeas(chapters) {
         let mainIdeas = [];
         for (let chapter of chapters) {
-            let prompt = `${personalityPrompt || ""}Please summarize these ideas: ${JSON.stringify(chapter.mainIdeas)} into a single idea. Return only the idea`;
+            let prompt = `Please summarize these ideas: ${JSON.stringify(chapter.mainIdeas)} into a single idea. Return only the idea`;
             let response = await this.request(prompt);
             mainIdeas.push(response);
         }
         return mainIdeas;
     }
 
-    async generateAbstract(mainIdeas, personalityPrompt) {
-        let prompt = `${personalityPrompt || ""}Please create an abstract for a document that has these main ideas: ${JSON.stringify(mainIdeas)}. Return only the abstract text`;
+    async generateAbstract(mainIdeas) {
+        let prompt = `Please create an abstract for a document that has these main ideas: ${JSON.stringify(mainIdeas)}. Return only the abstract text`;
         return await this.request(prompt);
     }
 
