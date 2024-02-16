@@ -10,7 +10,7 @@ export class AcceptParagraphIdea {
             let document = webSkel.currentUser.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
             let paragraph = chapter.getParagraph(paragraphId);
-            await paragraph.setMainIdea(sanitize(idea));
+            await paragraph.setMainIdea(webSkel.sanitize(idea));
             await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
             this.return(idea);
         } catch (e) {
