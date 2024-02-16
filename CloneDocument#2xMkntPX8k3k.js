@@ -36,7 +36,7 @@ export class CloneDocument {
         try {
             let docObj = JSON.parse(text);
             docObj.title = newTitle;
-            await documentFactory.addDocument(webSkel.currentUser.space.id, new DocumentModel(docObj));
+            await webSkel.currentUser.space.addDocument(docObj);
             this.return(JSON.stringify(docObj));
         } catch (e) {
             this.fail(e);
