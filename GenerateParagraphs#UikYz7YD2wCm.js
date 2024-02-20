@@ -5,99 +5,24 @@ export class GenerateParagraphs {
     constructor() {
     }
 
-    async start(title, topic, chaptersCount, personalityId, maxTokens) {
-        let personalityPrompt;
-        if (personalityId) {
-            let personality = webSkel.currentUser.space.getPersonality(personalityId);
-            personalityPrompt = `Step into the shoes of ${personality.name}, a character known for their distinctive traits: ${personality.description}. Your mission is to respond to the following prompt in such a way that it encapsulates the distinct essence of this character.`;
-        }
+    async start(ideas, documentId, chapterId, prompt, paragraphsNr) {
+        let document = webSkel.currentUser.space.getDocument(documentId);
+        let chapter = document.getChapter(chapterId);
+        this.prompt = `${prompt || "Please generate paragraphs based on the following array of ideas"}: "${ideas}\" and "${chapter.getMainIdeas()}". Generate ${paragraphsNr || "3"}. The response should have the following structure: {"paragraphs":[{"text":"paragraph 1 text", "mainIdea": "summary of paragraph 1"}, {"text":"paragraph 2 text", "mainIdea": "summary of paragraph 2"}, ... , {"text":"paragraph n text", "mainIdea": "summary of paragraph n"}]}.`;
         this.setDefaultValues();
+        this.setResponseFormat("json_object");
         this.setIntelligenceLevel(3);
-        let schema = await this.generateSchema(title, topic, chaptersCount, personalityPrompt);
-        let chapters = await this.generateChapters(schema, personalityPrompt);
-        let mainIdeas = await this.generateMainIdeas(chapters, personalityPrompt);
-        let abstract = await this.generateAbstract(mainIdeas, personalityPrompt);
-        await this.addDocument(title, topic, chapters, mainIdeas, abstract);
+        this.execute(document, chapter);
     }
-
-    async generateSchema(title, topic, chaptersCount, personalityPrompt) {
-        const documentSchemaPrompt = `${personalityPrompt || ""}Please generate a schema for a document. The topic of this document is ${topic} and it should have ${chaptersCount} chapters. The title is ${title}. The schema should have the following format: {"title": "Title of the document","chapters": [${this.countChapters(chaptersCount)}]}`;
-
-        function countChapters(chaptersCount) {
-            let chapters = '';
-            for (let i = 0; i < chaptersCount; i++) {
-                chapters += `{"title": "Chapter ${i} title","mainIdeas": ["Chapter ${i} idea 1", "Chapter ${i} idea 2", ..., "Chapter ${i} idea n"]}`;
-                if (i <= chaptersCount) {
-                    chapters += ', ';
-                }
-            }
-            return chapters;
-        }
-
-        let schema = await this.request(documentSchemaPrompt);
-
-        try {
-            return JSON.parse(schema);
-        } catch (e) {
+    async execute(document, chapter){
+        let paragraphs = await this.request(this.prompt);
+        try{
+            let paragraphsObj = JSON.parse(paragraphs);
+            await chapter.addParagraphs(paragraphsObj.paragraphs);
+            await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
+        }catch(e){
             this.fail(e);
         }
-    }
-
-    async generateChapters(schema, personalityPrompt) {
-        let generatedChapters = [];
-        let previousChapters;
-
-        for (let i = 0; i < schema.chapters.length; i++) {
-            if (i > 0) {
-                const includedAttributes = ['title', 'mainIdeas'];
-                let minimizedChapters = generatedChapters.map(obj => {
-                    return Object.fromEntries(
-                        Object.entries(obj).filter(([key]) => includedAttributes.includes(key))
-                    );
-                });
-                previousChapters = `Use a logical flow in your generation and continue your writing flow using these previous chapters and their main ideas:${JSON.stringify(minimizedChapters)}.`;
-            }
-
-            let generateChapterPrompt = `${personalityPrompt || ""}Please generate a chapter that is strictly related to these main ideas: ${JSON.stringify(schema.chapters[i].mainIdeas)} and this title:${schema.chapters[i].title}. ${previousChapters || ""} The chapter should have the following structure:{"title":"Chapter Title", "mainIdeas":["paragraph 1 summary", "paragraph 2 summary", ..., "paragraph n summary"], "paragraphs":[{"text":"paragraph 1 text", "mainIdea":"paragraph 1 summary"}, {"text":"paragraph 2 text", "mainIdea":"paragraph 2 summary"}, ... {"text":"paragraph n text", "mainIdea":"paragraph n summary"}]}.`;
-
-            let response = await this.request(generateChapterPrompt);
-
-            try {
-                generatedChapters.push(JSON.parse(response));
-            } catch (e) {
-                this.fail(e);
-            }
-        }
-
-        return generatedChapters;
-    }
-
-    async generateMainIdeas(chapters, personalityPrompt) {
-        let mainIdeas = [];
-
-        for (let chapter of chapters) {
-            let prompt = `${personalityPrompt || ""}Please summarize these ideas: ${JSON.stringify(chapters.mainIdeas)} into a single idea. Return only the idea`;
-            let response = await this.request(prompt);
-            mainIdeas.push(response);
-        }
-
-        return mainIdeas;
-    }
-
-    async generateAbstract(mainIdeas, personalityPrompt) {
-        let prompt = `${personalityPrompt || ""}Please create an abstract for a document that has these main ideas: ${JSON.stringify(mainIdeas)}. Return only the abstract text`;
-        return await this.request(prompt);
-    }
-
-    async addDocument(title, topic, chapters, mainIdeas, abstract) {
-        let documentData = {
-            title: title,
-            topic: topic,
-            chapters: chapters,
-            mainIdeas: mainIdeas,
-            abstract: abstract
-        };
-
-        await webSkel.currentUser.space.addDocument(documentData);
+        this.return(paragraphs);
     }
 }
