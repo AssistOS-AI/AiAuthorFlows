@@ -23,6 +23,7 @@ export class GenerateDocument {
         let mainIdeas = await this.generateMainIdeas(chapters);
         let abstract = await this.generateAbstract(mainIdeas);
         await this.addDocument(title, topic, chapters, mainIdeas, abstract);
+        this.return(title);
     }
 
     async generateSchema(title, topic, chaptersCount) {
