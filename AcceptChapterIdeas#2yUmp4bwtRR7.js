@@ -6,10 +6,10 @@ export class AcceptChapterIdeas {
 
     async start(documentId, chapterId, ideas) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
-            await chapter.setMainIdeas(ideas.map(chapterIdea => webSkel.sanitize(chapterIdea)));
-            await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
+            await chapter.setMainIdeas(ideas.map(chapterIdea => system.UI.sanitize(chapterIdea)));
+            await system.factories.updateDocument(system.space.id, document);
             this.return(ideas);
         } catch (e) {
             this.fail(e);

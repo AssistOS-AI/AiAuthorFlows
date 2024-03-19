@@ -7,7 +7,7 @@ export class DeleteAlternativeDocumentTitle {
 
     async start(documentId, alternativeTitleId) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             await document.deleteAlternativeTitle(alternativeTitleId);
             this.return(alternativeTitleId);
         } catch (e) {

@@ -9,7 +9,7 @@ export class GenerateDocument {
         let personalityPrompt;
 
         if (personalityId) {
-            let personality = webSkel.currentUser.space.getPersonality(personalityId);
+            let personality = system.space.getPersonality(personalityId);
             personalityPrompt = `Step into the shoes of ${personality.name}, a character known for their distinctive traits: ${personality.description}. Your mission is to respond to the following prompt in such a way that it encapsulates the distinct essence of this character. Don't reiterate ${personality.name}'s traits in your answer. `;
         }
 
@@ -98,6 +98,6 @@ export class GenerateDocument {
             abstract: abstract
         };
 
-        await webSkel.currentUser.space.addDocument(documentData);
+        await system.space.addDocument(documentData);
     }
 }

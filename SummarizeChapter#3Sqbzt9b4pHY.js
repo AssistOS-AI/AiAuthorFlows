@@ -6,7 +6,7 @@ export class SummarizeChapter {
     }
 
     async start(documentId, chapterId, prompt, maxTokens) {
-        let document = webSkel.currentUser.space.getDocument(documentId);
+        let document = system.space.getDocument(documentId);
         let chapter = document.getChapter(chapterId);
         this.prompt = `${prompt || "Please summarize the following chapter by making summaries for all paragraphs:"} "${JSON.stringify(chapter.simplifyChapter())}" . The response should have the following structure: ["paragraph 1 summary", "paragraph 2 summary", ... , "paragraph n summary"]`;
         this.setDefaultValues();

@@ -7,10 +7,10 @@ export class DeleteAlternativeAbstract {
 
     async start(documentId, alternativeAbstractId) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             document.deleteAlternativeAbstract(alternativeAbstractId);
-            await documentFactory.updateDocument(
-                webSkel.currentUser.space.id,
+            await system.factories.updateDocument(
+                system.space.id,
                 document
             );
             this.return(alternativeAbstractId);

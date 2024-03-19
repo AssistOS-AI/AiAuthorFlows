@@ -6,7 +6,7 @@ export class SuggestAbstract {
     }
 
     start(documentId, prompt, maxTokens) {
-        let document = webSkel.currentUser.space.getDocument(documentId);
+        let document = system.space.getDocument(documentId);
         this.prompt = `${prompt || "Please suggest an abstract for this document "}: ${JSON.stringify(
             document.simplifyDocument()
         )}. Return only the abstract text`;

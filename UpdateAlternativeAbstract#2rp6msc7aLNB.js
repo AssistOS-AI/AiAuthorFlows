@@ -7,7 +7,7 @@ export class UpdateAlternativeAbstract {
 
     async start(documentId, abstractId, text) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             await document.updateAlternativeAbstract(abstractId, text);
             this.return(abstractId);
         } catch (e) {

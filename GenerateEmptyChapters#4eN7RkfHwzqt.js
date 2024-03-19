@@ -6,7 +6,7 @@ export class GenerateEmptyChapters {
     }
 
     start(ideas, documentId, prompt, chaptersNr) {
-        let document = webSkel.currentUser.space.getDocument(documentId);
+        let document = system.space.getDocument(documentId);
         this.prompt = `${prompt || "Please generate chapter titles based on the following array of ideas"}: "${ideas}". Generate ${chaptersNr || "3"}. The response should have the following structure: {"titles":["chapter title 1", "chapter title 2", ... ,"chapter title n"]}.`;
         this.setDefaultValues();
         this.setIntelligenceLevel(3);

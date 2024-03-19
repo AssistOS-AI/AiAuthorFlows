@@ -7,7 +7,7 @@ export class SummarizeDocument {
 
     async start(documentId, prompt, maxTokens) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             let chapters = document.chapters.map((chapter) => chapter.simplifyChapter());
             this.prompt = `${prompt || "Please summarize the following document creating a main idea for all chapters:"} "${JSON.stringify(
                 chapters

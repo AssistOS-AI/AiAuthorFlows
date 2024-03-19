@@ -7,14 +7,14 @@ export class AcceptSuggestedParagraph {
 
     async start(documentId, chapterId, paragraphId, alternativeParagraph) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
             let paragraph = chapter.getParagraph(paragraphId);
 
             paragraph.addAlternativeParagraph(alternativeParagraph);
 
-            await documentFactory.updateDocument(
-                webSkel.currentUser.space.id,
+            await system.factories.updateDocument(
+                system.space.id,
                 document
             );
 

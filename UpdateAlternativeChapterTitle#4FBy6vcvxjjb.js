@@ -7,10 +7,10 @@ export class UpdateAlternativeChapterTitle {
 
     async start(documentId, chapterId, alternativeTitleId, newTitle) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
             chapter.updateAlternativeTitle(alternativeTitleId, newTitle);
-            await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
+            await system.factories.updateDocument(system.space.id, document);
             this.return(alternativeTitleId);
         } catch (e) {
             this.fail(e);

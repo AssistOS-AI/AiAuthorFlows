@@ -7,7 +7,7 @@ export class GenerateIdeas {
 
     async start(topic, personalityId, variants, maxTokens) {
         if (personalityId) {
-            let personality = webSkel.currentUser.space.getPersonality(personalityId);
+            let personality = system.space.getPersonality(personalityId);
             this.prompt = `Please suggest an idea based on the following topic: "${topic}". You will play the role of this personality: 
         "${personality.name}", which has the following characteristics: "${personality.description}". You will respond in such a way that it 
         encapsulates the distinct essence of this character. Return only the idea without quotation marks.`;

@@ -8,9 +8,9 @@ export class AcceptDocumentIdeas {
 
     async start(documentId, ideas) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
-            await document.setMainIdeas(ideas.map((documentIdea) => webSkel.sanitize(documentIdea)));
-            await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
+            let document = system.space.getDocument(documentId);
+            await document.setMainIdeas(ideas.map((documentIdea) => system.UI.sanitize(documentIdea)));
+            await system.factories.updateDocument(system.space.id, document);
             this.return(ideas);
         } catch (e) {
             this.fail(e);

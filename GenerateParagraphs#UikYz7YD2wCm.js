@@ -6,7 +6,7 @@ export class GenerateParagraphs {
     }
 
     async start(ideas, documentId, chapterId, prompt, paragraphsNr) {
-        let document = webSkel.currentUser.space.getDocument(documentId);
+        let document = system.space.getDocument(documentId);
         let chapter = document.getChapter(chapterId);
         this.prompt = `${prompt || "Please generate paragraphs based on the following array of ideas"}: "${ideas}\" and "${chapter.getMainIdeas()}". Generate ${paragraphsNr || "3"}. The response should have the following structure: {"paragraphs":[{"text":"paragraph 1 text", "mainIdea": "summary of paragraph 1"}, {"text":"paragraph 2 text", "mainIdea": "summary of paragraph 2"}, ... , {"text":"paragraph n text", "mainIdea": "summary of paragraph n"}]}.`;
         this.setDefaultValues();
@@ -19,7 +19,7 @@ export class GenerateParagraphs {
         try{
             let paragraphsObj = JSON.parse(paragraphs);
             await chapter.addParagraphs(paragraphsObj.paragraphs);
-            await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
+            await system.factories.updateDocument(system.space.id, document);
         }catch(e){
             this.fail(e);
         }

@@ -8,13 +8,13 @@ export class AddAlternativeChapter {
        this.Chapter = Chapter;
    }
    async start(documentId, chapterId, alternativeChapter){
-       let document = webSkel.currentUser.space.getDocument(documentId);
+       let document = system.space.getDocument(documentId);
        let chapter = document.getChapter(chapterId)
-       alternativeChapter.id=webSkel.appServices.generateId();
+       alternativeChapter.id=system.services.generateId();
        for(let paragraph of alternativeChapter.paragraphs){
-           paragraph.id=webSkel.appServices.generateId();
+           paragraph.id=system.services.generateId();
        }
        chapter.alternativeChapters.push(new this.Chapter(alternativeChapter));
-       await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
+       await system.factories.updateDocument(system.space.id, document);
    }
 }

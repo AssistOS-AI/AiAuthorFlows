@@ -7,7 +7,7 @@ export class AddAlternativeDocumentTitles {
 
     async start(documentId, selectedTitles) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             await document.addAlternativeTitles(selectedTitles);
             this.return(selectedTitles);
         } catch (e) {

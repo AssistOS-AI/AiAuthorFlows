@@ -7,10 +7,10 @@ export class AcceptSuggestedAbstract {
 
     async start(documentId, abstract) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             await document.addAlternativeAbstract({
-                content: webSkel.sanitize(abstract),
-                id: webSkel.appServices.generateId()
+                content: system.UI.sanitize(abstract),
+                id: system.services.generateId()
             });
             this.return(abstract);
         } catch (e) {

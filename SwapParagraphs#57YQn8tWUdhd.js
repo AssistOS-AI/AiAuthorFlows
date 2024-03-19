@@ -7,12 +7,12 @@ export class SwapParagraphs {
 
     async start(documentId, chapterId, paragraphId1, paragraphId2) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
 
             if (chapter.swapParagraphs(paragraphId1, paragraphId2)) {
-                await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
-                webSkel.currentUser.space.currentParagraphId = paragraphId1;
+                await system.factories.updateDocument(system.space.id, document);
+                system.space.currentParagraphId = paragraphId1;
             } else {
                 this.fail(`Unable to swap paragraphs. ${paragraphId1}, ${paragraphId2}, Chapter: ${chapterId}`);
             }

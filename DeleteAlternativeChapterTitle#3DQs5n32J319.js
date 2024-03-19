@@ -7,10 +7,10 @@ export class DeleteAlternativeChapterTitle {
 
     async start(documentId, chapterId, alternativeTitleId) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
             chapter.deleteAlternativeTitle(alternativeTitleId);
-            await documentFactory.updateDocument(webSkel.currentUser.space.id, document);
+            await system.factories.updateDocument(system.space.id, document);
             this.return(alternativeTitleId);
         } catch (e) {
             this.fail(e);

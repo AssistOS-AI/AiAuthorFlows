@@ -7,7 +7,7 @@ export class SuggestDocumentTitles {
 
     async start(documentId, prompt, titlesNr, maxTokens) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             this.prompt = `${prompt || "Please suggest a title for a document, take into consideration these aspects of the document"}: "${JSON.stringify(document.simplifyDocument())}". Return only the title without quotation marks.`;
             this.setDefaultValues();
             this.setIntelligenceLevel(3);

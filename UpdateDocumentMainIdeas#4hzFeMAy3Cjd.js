@@ -7,7 +7,7 @@ export class UpdateDocumentMainIdeas {
 
     async start(documentId, ideas) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             await document.setMainIdeas(ideas);
             this.return(ideas);
         } catch (e) {

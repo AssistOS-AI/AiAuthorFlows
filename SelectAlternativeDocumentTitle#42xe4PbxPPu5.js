@@ -7,7 +7,7 @@ export class SelectAlternativeDocumentTitle {
 
     async start(documentId, alternativeTitleId) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             await document.selectAlternativeTitle(alternativeTitleId);
             return alternativeTitleId;
         } catch (e) {

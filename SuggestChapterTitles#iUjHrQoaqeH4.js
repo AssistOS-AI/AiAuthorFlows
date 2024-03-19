@@ -6,7 +6,7 @@ export class SuggestChapterTitles {
     }
 
     start(documentId, chapterId, prompt, titlesNr, maxTokens) {
-        let document = webSkel.currentUser.space.getDocument(documentId);
+        let document = system.space.getDocument(documentId);
         let chapter = document.getChapter(chapterId);
         this.prompt = `${prompt || "Please suggest a title for this chapter"}: "${JSON.stringify(chapter.simplifyChapter())}". Return only the title without quotation marks.`;
         this.setDefaultValues();

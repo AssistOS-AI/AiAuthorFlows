@@ -7,7 +7,7 @@ export class SuggestParagraph {
 
     start(documentId, chapterId, paragraphId, prompt, maxTokens) {
         try {
-            let document = webSkel.currentUser.space.getDocument(documentId);
+            let document = system.space.getDocument(documentId);
             let chapter = document.getChapter(chapterId);
             this.prompt = `${prompt || "Please suggest a paragraph that fits in the following chapter:"} "${JSON.stringify(chapter.simplifyChapter())}". The result should have the following structure: { "text": "paragraph text", "mainIdea": "main idea of the paragraph"}.`;
             this.setDefaultValues();
