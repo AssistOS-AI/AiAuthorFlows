@@ -6,12 +6,12 @@ export class AcceptDocumentIdeas {
 
     }
 
-    async start(documentId, ideas) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            await document.setMainIdeas(ideas.map((documentIdea) => system.UI.sanitize(documentIdea)));
+            let document = system.space.getDocument(context.documentId);
+            await document.setMainIdeas(context.ideas.map((documentIdea) => system.UI.sanitize(documentIdea)));
             await system.factories.updateDocument(system.space.id, document);
-            this.return(ideas);
+            this.return(context.ideas);
         } catch (e) {
             this.fail(e);
         }

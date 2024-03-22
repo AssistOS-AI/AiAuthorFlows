@@ -5,15 +5,15 @@ export class DeleteAlternativeAbstract {
     constructor() {
     }
 
-    async start(documentId, alternativeAbstractId) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            document.deleteAlternativeAbstract(alternativeAbstractId);
+            let document = system.space.getDocument(context.documentId);
+            document.deleteAlternativeAbstract(context.alternativeAbstractId);
             await system.factories.updateDocument(
                 system.space.id,
                 document
             );
-            this.return(alternativeAbstractId);
+            this.return(context.alternativeAbstractId);
         } catch (e) {
             this.fail(e);
         }

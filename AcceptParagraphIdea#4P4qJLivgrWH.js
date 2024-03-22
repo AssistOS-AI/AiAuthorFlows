@@ -5,14 +5,14 @@ export class AcceptParagraphIdea {
     constructor() {
     }
 
-    async start(documentId, chapterId, paragraphId, idea) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            let paragraph = chapter.getParagraph(paragraphId);
-            await paragraph.setMainIdea(system.UI.sanitize(idea));
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            let paragraph = chapter.getParagraph(context.paragraphId);
+            await paragraph.setMainIdea(system.UI.sanitize(context.idea));
             await system.factories.updateDocument(system.space.id, document);
-            this.return(idea);
+            this.return(context.idea);
         } catch (e) {
             this.fail(e);
         }

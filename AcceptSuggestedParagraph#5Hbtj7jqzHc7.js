@@ -5,20 +5,20 @@ export class AcceptSuggestedParagraph {
 
     }
 
-    async start(documentId, chapterId, paragraphId, alternativeParagraph) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            let paragraph = chapter.getParagraph(paragraphId);
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            let paragraph = chapter.getParagraph(context.paragraphId);
 
-            paragraph.addAlternativeParagraph(alternativeParagraph);
+            paragraph.addAlternativeParagraph(context.alternativeParagraph);
 
             await system.factories.updateDocument(
                 system.space.id,
                 document
             );
 
-            this.return(alternativeParagraph);
+            this.return(context.alternativeParagraph);
         } catch (e) {
             this.fail(e);
         }

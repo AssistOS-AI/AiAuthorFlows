@@ -5,11 +5,11 @@ export class AddAlternativeDocumentTitles {
     constructor() {
     }
 
-    async start(documentId, selectedTitles) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            await document.addAlternativeTitles(selectedTitles);
-            this.return(selectedTitles);
+            let document = system.space.getDocument(context.documentId);
+            await document.addAlternativeTitles(context.selectedTitles);
+            this.return(context.selectedTitles);
         } catch (e) {
             this.fail(e);
         }

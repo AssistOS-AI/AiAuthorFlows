@@ -5,13 +5,13 @@ export class AddAlternativeChapterTitles {
     constructor() {
     }
 
-    async start(documentId, chapterId, selectedTitles) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            chapter.addAlternativeTitles(selectedTitles);
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            chapter.addAlternativeTitles(context.titles);
             await system.factories.updateDocument(system.space.id, document);
-            this.return(selectedTitles);
+            this.return(context.titles);
         } catch (e) {
             this.fail(e);
         }

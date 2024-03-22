@@ -4,13 +4,13 @@ export class AcceptChapterIdeas {
     constructor() {
     }
 
-    async start(documentId, chapterId, ideas) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            await chapter.setMainIdeas(ideas.map(chapterIdea => system.UI.sanitize(chapterIdea)));
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            await chapter.setMainIdeas(context.ideas.map(chapterIdea => system.UI.sanitize(chapterIdea)));
             await system.factories.updateDocument(system.space.id, document);
-            this.return(ideas);
+            this.return(context.ideas);
         } catch (e) {
             this.fail(e);
         }

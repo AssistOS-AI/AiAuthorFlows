@@ -5,14 +5,14 @@ export class AcceptSuggestedAbstract {
     constructor() {
     }
 
-    async start(documentId, abstract) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
+            let document = system.space.getDocument(context.documentId);
             await document.addAlternativeAbstract({
-                content: system.UI.sanitize(abstract),
+                content: system.UI.sanitize(context.abstract),
                 id: system.services.generateId()
             });
-            this.return(abstract);
+            this.return(context.abstract);
         } catch (e) {
             this.fail(e);
         }

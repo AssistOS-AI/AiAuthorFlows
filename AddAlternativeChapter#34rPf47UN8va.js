@@ -7,14 +7,14 @@ export class AddAlternativeChapter {
    constructor(Chapter) {
        this.Chapter = Chapter;
    }
-   async start(documentId, chapterId, alternativeChapter){
-       let document = system.space.getDocument(documentId);
-       let chapter = document.getChapter(chapterId)
-       alternativeChapter.id=system.services.generateId();
-       for(let paragraph of alternativeChapter.paragraphs){
+   async start(context){
+       let document = system.space.getDocument(context.documentId);
+       let chapter = document.getChapter(context.chapterId)
+       context.alternativeChapter.id=system.services.generateId();
+       for(let paragraph of context.alternativeChapter.paragraphs){
            paragraph.id=system.services.generateId();
        }
-       chapter.alternativeChapters.push(new this.Chapter(alternativeChapter));
+       chapter.alternativeChapters.push(new this.Chapter(context.alternativeChapter));
        await system.factories.updateDocument(system.space.id, document);
    }
 }
