@@ -5,14 +5,14 @@ export class SelectAlternativeParagraph {
     constructor() {
     }
 
-    async start(documentId, chapterId, paragraphId, alternativeParagraphId) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            let paragraph = chapter.getParagraph(paragraphId);
-            paragraph.selectAlternativeParagraph(alternativeParagraphId);
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            let paragraph = chapter.getParagraph(context.paragraphId);
+            paragraph.selectAlternativeParagraph(context.alternativeParagraphId);
             await system.factories.updateDocument(system.space.id, document);
-            return alternativeParagraphId;
+            this.return(context.alternativeParagraphId);
         } catch (e) {
             this.fail(e);
         }

@@ -5,14 +5,12 @@ export class SuggestAbstract {
     constructor() {
     }
 
-    start(documentId, prompt, maxTokens) {
-        let document = system.space.getDocument(documentId);
-        this.prompt = `${prompt || "Please suggest an abstract for this document "}: ${JSON.stringify(
+    start(context) {
+        let document = system.space.getDocument(context.documentId);
+        this.prompt = `${context.prompt || "Please suggest an abstract for this document "}: ${JSON.stringify(
             document.simplifyDocument()
         )}. Return only the abstract text`;
-        this.setDefaultValues();
-        this.setIntelligenceLevel(3);
-        this.execute(document, maxTokens);
+        this.execute(document, context.maxTokens);
     }
 
     async execute(document, maxTokens) {

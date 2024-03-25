@@ -5,11 +5,9 @@ export class GenerateEmptyChapters {
     constructor() {
     }
 
-    start(ideas, documentId, prompt, chaptersNr) {
-        let document = system.space.getDocument(documentId);
-        this.prompt = `${prompt || "Please generate chapter titles based on the following array of ideas"}: "${ideas}". Generate ${chaptersNr || "3"}. The response should have the following structure: {"titles":["chapter title 1", "chapter title 2", ... ,"chapter title n"]}.`;
-        this.setDefaultValues();
-        this.setIntelligenceLevel(3);
+    start(context) {
+        let document = system.space.getDocument(context.documentId);
+        this.prompt = `${context.prompt || "Please generate chapter titles based on the following array of ideas"}: "${context.ideas}". Generate ${context.chaptersNr || "3"}. The response should have the following structure: {"titles":["chapter title 1", "chapter title 2", ... ,"chapter title n"]}.`;
         this.execute(document);
     }
 

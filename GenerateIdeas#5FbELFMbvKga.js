@@ -5,19 +5,12 @@ export class GenerateIdeas {
     constructor() {
     }
 
-    async start(topic, personalityId, variants, maxTokens) {
-        if (personalityId) {
-            let personality = system.space.getPersonality(personalityId);
-            this.prompt = `Please suggest an idea based on the following topic: "${topic}". You will play the role of this personality: 
+    async start(context, personality) {
+        this.prompt = `Please suggest an idea based on the following topic: "${context.topic}". You will play the role of this personality: 
         "${personality.name}", which has the following characteristics: "${personality.description}". You will respond in such a way that it 
         encapsulates the distinct essence of this character. Return only the idea without quotation marks.`;
-        } else {
-            this.prompt = `Please suggest an idea based on the following topic: "${topic}". Return only the idea without quotation marks.`;
-        }
 
-        this.setDefaultValues();
-        this.setIntelligenceLevel(3);
-        this.execute(variants, maxTokens);
+        this.execute(context.variants, context.maxTokens);
     }
 
     async execute(variants, maxTokens) {

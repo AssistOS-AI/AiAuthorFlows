@@ -5,11 +5,11 @@ export class UpdateAlternativeAbstract {
     constructor() {
     }
 
-    async start(documentId, abstractId, text) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            await document.updateAlternativeAbstract(abstractId, text);
-            this.return(abstractId);
+            let document = system.space.getDocument(context.documentId);
+            await document.updateAlternativeAbstract(context.abstractId, context.text);
+            this.return(context.abstractId);
         } catch (e) {
             this.fail(e);
         }

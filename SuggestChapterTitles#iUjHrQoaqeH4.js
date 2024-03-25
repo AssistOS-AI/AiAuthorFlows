@@ -5,13 +5,11 @@ export class SuggestChapterTitles {
     constructor() {
     }
 
-    start(documentId, chapterId, prompt, titlesNr, maxTokens) {
-        let document = system.space.getDocument(documentId);
-        let chapter = document.getChapter(chapterId);
-        this.prompt = `${prompt || "Please suggest a title for this chapter"}: "${JSON.stringify(chapter.simplifyChapter())}". Return only the title without quotation marks.`;
-        this.setDefaultValues();
-        this.setIntelligenceLevel(3);
-        this.execute(document, chapter, titlesNr, maxTokens);
+    start(context) {
+        let document = system.space.getDocument(context.documentId);
+        let chapter = document.getChapter(context.chapterId);
+        this.prompt = `${context.prompt || "Please suggest a title for this chapter"}: "${JSON.stringify(chapter.simplifyChapter())}". Return only the title without quotation marks.`;
+        this.execute(document, chapter, context.titlesNr, context.maxTokens);
     }
 
     async execute(document, chapter, titlesNr, maxTokens) {

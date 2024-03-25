@@ -5,13 +5,13 @@ export class DeleteAlternativeChapter {
     constructor() {
     }
 
-    async start(documentId, chapterId, alternativeChapterId) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            chapter.deleteAlternativeChapter(alternativeChapterId);
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            chapter.deleteAlternativeChapter(context.alternativeChapterId);
             await system.factories.updateDocument(system.space.id, document);
-            this.return(alternativeChapterId);
+            this.return(context.alternativeChapterId);
         } catch (e) {
             this.fail(e);
         }

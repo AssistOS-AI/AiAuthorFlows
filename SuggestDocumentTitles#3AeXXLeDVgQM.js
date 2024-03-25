@@ -5,13 +5,11 @@ export class SuggestDocumentTitles {
     constructor() {
     }
 
-    async start(documentId, prompt, titlesNr, maxTokens) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            this.prompt = `${prompt || "Please suggest a title for a document, take into consideration these aspects of the document"}: "${JSON.stringify(document.simplifyDocument())}". Return only the title without quotation marks.`;
-            this.setDefaultValues();
-            this.setIntelligenceLevel(3);
-            this.execute(titlesNr, maxTokens);
+            let document = system.space.getDocument(context.documentId);
+            this.prompt = `${context.prompt || "Please suggest a title for a document, take into consideration these aspects of the document"}: "${JSON.stringify(document.simplifyDocument())}". Return only the title without quotation marks.`;
+            this.execute(context.titlesNr, context.maxTokens);
         } catch (e) {
             this.fail(e);
         }

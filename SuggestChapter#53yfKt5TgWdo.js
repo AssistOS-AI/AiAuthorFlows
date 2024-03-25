@@ -5,10 +5,8 @@ export class SuggestChapter {
     constructor() {
     }
 
-    start(idea) {
-        this.prompt = `Please suggest a chapter based on the following idea: "${idea}". The answer should have the following structure: { "title": "A fitting chapter title for the content", "visibility": "show", "paragraphs": [ { "text": "Text for this paragraph", "mainIdea": "The main idea for this paragraph", "alternativeParagraphs": [] }, ...additional paragraphs in similar format... ], "alternativeChapters": [], "mainIdeas": ["Main idea 1 for the chapter", ...additional main ideas...] }`;
-        this.setDefaultValues();
-        this.setIntelligenceLevel(3);
+    start(context) {
+        this.prompt = `Please suggest a chapter based on the following idea: "${context.idea}". The answer should have the following structure: { "title": "A fitting chapter title for the content", "visibility": "show", "paragraphs": [ { "text": "Text for this paragraph", "mainIdea": "The main idea for this paragraph", "alternativeParagraphs": [] }, ...additional paragraphs in similar format... ], "alternativeChapters": [], "mainIdeas": ["Main idea 1 for the chapter", ...additional main ideas...] }`;
         this.execute();
     }
 

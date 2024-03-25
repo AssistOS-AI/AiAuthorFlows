@@ -5,14 +5,12 @@ export class SummarizeParagraph {
     constructor() {
     }
 
-    async start(documentId, chapterId, paragraphId, prompt, maxTokens) {
-        let document = system.space.getDocument(documentId);
-        let chapter = document.getChapter(chapterId);
-        let paragraph = chapter.getParagraph(paragraphId);
-        this.prompt = `${prompt || "Please summarize the following paragraph in a single idea:"} "${paragraph.text}". Return only the summary`;
-        this.setDefaultValues();
-        this.setIntelligenceLevel(3);
-        this.execute(maxTokens);
+    async start(context) {
+        let document = system.space.getDocument(context.documentId);
+        let chapter = document.getChapter(context.chapterId);
+        let paragraph = chapter.getParagraph(context.paragraphId);
+        this.prompt = `${context.prompt || "Please summarize the following paragraph in a single idea:"} "${paragraph.text}". Return only the summary`;
+        await this.execute(context.maxTokens);
     }
 
     async execute(maxTokens) {

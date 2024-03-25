@@ -5,13 +5,13 @@ export class UpdateChapterMainIdeas {
     constructor() {
     }
 
-    async start(documentId, chapterId, ideas) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            chapter.setMainIdeas(ideas);
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            chapter.setMainIdeas(context.ideas);
             await system.factories.updateDocument(system.space.id, document);
-            this.return(ideas);
+            this.return(context.ideas);
         } catch (e) {
             this.fail(e);
         }

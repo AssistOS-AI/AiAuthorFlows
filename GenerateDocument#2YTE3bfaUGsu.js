@@ -5,25 +5,19 @@ export class GenerateDocument {
     constructor() {
     }
 
-    async start(title, topic, chaptersCount, personalityId, maxTokens) {
+    async start(context, personality) {
         let personalityPrompt;
+        personalityPrompt = `Step into the shoes of ${personality.name}, a character known for their distinctive traits: ${personality.description}. Your mission is to respond to the following prompt in such a way that it encapsulates the distinct essence of this character. Don't reiterate ${personality.name}'s traits in your answer. `;
 
-        if (personalityId) {
-            let personality = system.space.getPersonality(personalityId);
-            personalityPrompt = `Step into the shoes of ${personality.name}, a character known for their distinctive traits: ${personality.description}. Your mission is to respond to the following prompt in such a way that it encapsulates the distinct essence of this character. Don't reiterate ${personality.name}'s traits in your answer. `;
-        }
-
-        this.setDefaultValues();
         this.setResponseFormat("json_object");
-        this.setIntelligenceLevel(3);
         this.addSystemMessage(personalityPrompt);
-        let schema = await this.generateSchema(title, topic, chaptersCount);
+        let schema = await this.generateSchema(context.title, context.topic, context.chaptersCount);
         let chapters = await this.generateChapters(schema);
         this.setResponseFormat("text");
         let mainIdeas = await this.generateMainIdeas(chapters);
         let abstract = await this.generateAbstract(mainIdeas);
-        await this.addDocument(title, topic, chapters, mainIdeas, abstract);
-        this.return(title);
+        await this.addDocument(context.title, context.topic, chapters, mainIdeas, abstract);
+        this.return(context.title);
     }
 
     async generateSchema(title, topic, chaptersCount) {

@@ -5,13 +5,13 @@ export class SelectAlternativeChapter {
     constructor() {
     }
 
-    async start(documentId, chapterId, alternativeChapterId) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            chapter.selectAlternativeChapter(alternativeChapterId);
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            chapter.selectAlternativeChapter(context.alternativeChapterId);
             await system.factories.updateDocument(system.space.id, document);
-            this.return(alternativeChapterId);
+            this.return(context.alternativeChapterId);
         } catch (e) {
             this.fail(e);
         }

@@ -5,11 +5,11 @@ export class SelectAlternativeDocumentTitle {
     constructor() {
     }
 
-    async start(documentId, alternativeTitleId) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            await document.selectAlternativeTitle(alternativeTitleId);
-            return alternativeTitleId;
+            let document = system.space.getDocument(context.documentId);
+            await document.selectAlternativeTitle(context.alternativeTitleId);
+            this.return(context.alternativeTitleId);
         } catch (e) {
             this.fail(e);
         }

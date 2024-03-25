@@ -5,11 +5,11 @@ export class UpdateDocumentMainIdeas {
     constructor() {
     }
 
-    async start(documentId, ideas) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            await document.setMainIdeas(ideas);
-            this.return(ideas);
+            let document = system.space.getDocument(context.documentId);
+            await document.setMainIdeas(context.ideas);
+            this.return(context.ideas);
         } catch (e) {
             this.fail(e);
         }

@@ -5,14 +5,12 @@ export class SuggestParagraph {
     constructor() {
     }
 
-    start(documentId, chapterId, paragraphId, prompt, maxTokens) {
+    start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            let chapter = document.getChapter(chapterId);
-            this.prompt = `${prompt || "Please suggest a paragraph that fits in the following chapter:"} "${JSON.stringify(chapter.simplifyChapter())}". The result should have the following structure: { "text": "paragraph text", "mainIdea": "main idea of the paragraph"}.`;
-            this.setDefaultValues();
-            this.setIntelligenceLevel(3);
-            this.execute(maxTokens);
+            let document = system.space.getDocument(context.documentId);
+            let chapter = document.getChapter(context.chapterId);
+            this.prompt = `${context.prompt || "Please suggest a paragraph that fits in the following chapter:"} "${JSON.stringify(chapter.simplifyChapter())}". The result should have the following structure: { "text": "paragraph text", "mainIdea": "main idea of the paragraph"}.`;
+            this.execute(context.maxTokens);
         } catch (e) {
             this.fail(e);
         }

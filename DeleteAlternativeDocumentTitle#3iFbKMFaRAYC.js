@@ -5,11 +5,11 @@ export class DeleteAlternativeDocumentTitle {
     constructor() {
     }
 
-    async start(documentId, alternativeTitleId) {
+    async start(context) {
         try {
-            let document = system.space.getDocument(documentId);
-            await document.deleteAlternativeTitle(alternativeTitleId);
-            this.return(alternativeTitleId);
+            let document = system.space.getDocument(context.documentId);
+            await document.deleteAlternativeTitle(context.alternativeTitleId);
+            this.return(context.alternativeTitleId);
         } catch (e) {
             this.fail(e);
         }
