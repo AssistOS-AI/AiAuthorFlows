@@ -18,10 +18,9 @@ export class SuggestDocumentTitles {
     async execute(titlesNr, maxTokens) {
         let alternativeTitles = await this.brainstorm(this.prompt, titlesNr, maxTokens);
         try {
-            JSON.parse(alternativeTitles);
+            this.return(JSON.parse(alternativeTitles));
         } catch (e) {
             this.fail(e);
         }
-        this.return(alternativeTitles);
     }
 }

@@ -19,6 +19,10 @@ export class Proofread {
 
     async execute() {
         let result = await this.proofread(this.prompt);
-        this.return(result);
+        try {
+            this.return(JSON.parse(result));
+        }catch (e) {
+            this.fail(e);
+        }
     }
 }

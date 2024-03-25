@@ -16,9 +16,9 @@ export class GenerateChapters {
         try {
             let chaptersObj = JSON.parse(chapters);
             await document.addChapters(chaptersObj);
+            this.return(chaptersObj);
         } catch (e) {
             this.fail(e);
         }
-        this.return(chapters);
     }
 }

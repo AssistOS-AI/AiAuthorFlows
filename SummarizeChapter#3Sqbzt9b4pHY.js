@@ -15,10 +15,9 @@ export class SummarizeChapter {
     async execute(maxTokens) {
         let ideas = await this.request(this.prompt, maxTokens);
         try {
-            JSON.parse(ideas);
+            this.return(JSON.parse(ideas));
         } catch (e) {
             this.fail(e);
         }
-        this.return(ideas);
     }
 }

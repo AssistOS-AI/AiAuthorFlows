@@ -13,10 +13,9 @@ export class SuggestChapter {
     async execute() {
         let altChapter = await this.brainstorm(this.prompt, 1);
         try {
-            JSON.parse(altChapter);
+            this.return(JSON.parse(altChapter));
         } catch (e) {
             this.fail(e);
         }
-        this.return(altChapter);
     }
 }

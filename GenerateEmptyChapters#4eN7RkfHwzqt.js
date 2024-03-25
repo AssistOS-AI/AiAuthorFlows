@@ -16,9 +16,9 @@ export class GenerateEmptyChapters {
         try {
             let titlesObj = JSON.parse(titles);
             await document.addEmptyChapters(titlesObj);
+            this.return(titlesObj);
         } catch (e) {
             this.fail(e);
         }
-        this.return(titles);
     }
 }

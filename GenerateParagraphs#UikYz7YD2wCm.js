@@ -18,9 +18,9 @@ export class GenerateParagraphs {
             let paragraphsObj = JSON.parse(paragraphs);
             await chapter.addParagraphs(paragraphsObj.paragraphs);
             await system.factories.updateDocument(system.space.id, document);
+            this.return(paragraphsObj);
         }catch(e){
             this.fail(e);
         }
-        this.return(paragraphs);
     }
 }

@@ -19,10 +19,9 @@ export class SuggestParagraph {
     async execute(maxTokens) {
         let altParagraph = await this.request(this.prompt, maxTokens);
         try {
-            JSON.parse(altParagraph);
+            this.return(JSON.parse(altParagraph));
         } catch (e) {
             this.fail(e);
         }
-        this.return(altParagraph);
     }
 }
