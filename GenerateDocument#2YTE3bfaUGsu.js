@@ -1,7 +1,11 @@
 export class GenerateDocument {
     static id = "2YTE3bfaUGsu";
     static description = "Generates a whole document based on: a title, a topic, number of chapters";
-
+    static inputSchema = {
+        title: "string",
+        topic: "string",
+        chaptersCount: "string"
+    }
     constructor() {
     }
 
