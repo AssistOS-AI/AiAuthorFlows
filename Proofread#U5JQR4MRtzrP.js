@@ -4,9 +4,7 @@ export class Proofread {
 
     static inputSchema=
         {
-            text:"string",
-            personalityId:"string",
-            prompt:"string"
+            text:"string"
         };
     constructor() {
 
