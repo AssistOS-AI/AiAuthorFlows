@@ -1,10 +1,10 @@
 export class UpdateDocumentTitle {
     static id = "4My96443fbG4";
     static description = "Updates the title of a document";
-
-    constructor() {
+    static inputSchema = {
+        documentId: "string",
+        title: "string"
     }
-
     async start(context) {
         try {
             let document = system.space.getDocument(context.documentId);

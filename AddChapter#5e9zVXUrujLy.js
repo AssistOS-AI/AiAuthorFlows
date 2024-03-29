@@ -1,10 +1,9 @@
 export class AddChapter {
     static id = "5e9zVXUrujLy";
     static description = "Adds a new chapter to a document";
-
-    constructor() {
+    static inputSchema = {
+        documentId: "string",
     }
-
     async start(context) {
         if (!context.title) {
             context.title = "NewChapter";
