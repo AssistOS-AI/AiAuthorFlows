@@ -5,15 +5,12 @@ export class SuggestChapterTitles {
     constructor() {
     }
 
-    start(context) {
+    async start(context) {
         let document = assistOS.space.getDocument(context.documentId);
         let chapter = document.getChapter(context.chapterId);
-        this.prompt = `${context.prompt || "Please suggest a title for this chapter"}: "${JSON.stringify(chapter.simplifyChapter())}". Return only the title without quotation marks.`;
-        this.execute(document, chapter, context.titlesNr, context.maxTokens);
-    }
-
-    async execute(document, chapter, titlesNr, maxTokens) {
-        let alternativeTitles = await this.brainstorm(this.prompt, titlesNr, maxTokens);
+        let prompt = `${context.prompt || "Please suggest a title for this chapter"}: "${JSON.stringify(chapter.simplifyChapter())}". Return only the title without quotation marks.`;
+        let llm = assistOS.space.getLLM();
+        let alternativeTitles = await llm.brainstorm(prompt, context.titlesNr, context.maxTokens);
         try {
             this.return(JSON.parse(alternativeTitles));
         } catch (e) {

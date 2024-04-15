@@ -12,12 +12,12 @@ export class GenerateDocument {
     async start(context, personality) {
         let personalityPrompt;
         personalityPrompt = `Step into the shoes of ${personality.name}, a character known for their distinctive traits: ${personality.description}. Your mission is to respond to the following prompt in such a way that it encapsulates the distinct essence of this character. Don't reiterate ${personality.name}'s traits in your answer. `;
-
-        this.setResponseFormat("json_object");
-        this.addSystemMessage(personalityPrompt);
+        this.llm = assistOS.space.getLLM();
+        this.llm.setResponseFormat("json_object");
+        this.llm.addSystemMessage(personalityPrompt);
         let schema = await this.generateSchema(context.title, context.topic, context.chaptersCount);
         let chapters = await this.generateChapters(schema);
-        this.setResponseFormat("text");
+        this.llm.setResponseFormat("text");
         let mainIdeas = await this.generateMainIdeas(chapters);
         let abstract = await this.generateAbstract(mainIdeas);
         await this.addDocument(context.title, context.topic, chapters, mainIdeas, abstract);
@@ -38,7 +38,7 @@ export class GenerateDocument {
             return chapters;
         }
 
-        let schema = await this.request(documentSchemaPrompt);
+        let schema = await this.llm.request(documentSchemaPrompt);
         try {
             return JSON.parse(schema);
         } catch (e) {
@@ -62,7 +62,7 @@ export class GenerateDocument {
                 previousChapters = `Use a logical flow in your generation and continue your writing flow using these previous chapters and their main ideas:${JSON.stringify(minimizedChapters)}.`;
             }
             let generateChapterPrompt = `Please generate a chapter that is strictly related to these main ideas: ${JSON.stringify(schema.chapters[i].mainIdeas)} and this title:${schema.chapters[i].title}. ${previousChapters || ""} The chapter should have the following structure:{\"title\":\"Chapter Title\", \"mainIdeas\":[\"paragraph 1 summary\", \"paragraph 2 summary\", ... , \"paragraph n summary\"], \"paragraphs\":[{text:\"paragraph 1 text\", mainIdea:\"paragraph 1 summary\"}, {text:\"paragraph 2 text\", mainIdea:\"paragraph 2 summary\"}, ... {text:\"paragraph n text\", mainIdea:\"paragraph n summary\"}]}.`;
-            let response = await this.request(generateChapterPrompt);
+            let response = await this.llm.request(generateChapterPrompt);
             try {
                 generatedChapters.push(JSON.parse(response));
             } catch (e) {
@@ -76,7 +76,7 @@ export class GenerateDocument {
         let mainIdeas = [];
         for (let chapter of chapters) {
             let prompt = `Please summarize these ideas: ${JSON.stringify(chapter.mainIdeas)} into a single idea. Return only the idea`;
-            let response = await this.request(prompt);
+            let response = await this.llm.request(prompt);
             mainIdeas.push(response);
         }
         return mainIdeas;
@@ -84,7 +84,7 @@ export class GenerateDocument {
 
     async generateAbstract(mainIdeas) {
         let prompt = `Please create an abstract for a document that has these main ideas: ${JSON.stringify(mainIdeas)}. Return only the abstract text`;
-        return await this.request(prompt);
+        return await this.llm.request(prompt);
     }
 
     async addDocument(title, topic, chapters, mainIdeas, abstract) {

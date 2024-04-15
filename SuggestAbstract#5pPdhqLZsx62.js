@@ -5,16 +5,13 @@ export class SuggestAbstract {
     constructor() {
     }
 
-    start(context) {
+    async start(context) {
         let document = assistOS.space.getDocument(context.documentId);
-        this.prompt = `${context.prompt || "Please suggest an abstract for this document "}: ${JSON.stringify(
+        let prompt = `${context.prompt || "Please suggest an abstract for this document "}: ${JSON.stringify(
             document.simplifyDocument()
         )}. Return only the abstract text`;
-        this.execute(document, context.maxTokens);
-    }
-
-    async execute(document, maxTokens) {
-        let altAbstract = await this.request(this.prompt, maxTokens);
+        let llm = assistOS.space.getLLM();
+        let altAbstract = await llm.request(prompt, maxTokens);
         this.return(altAbstract);
     }
 }

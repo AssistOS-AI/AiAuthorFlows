@@ -6,17 +6,16 @@ export class GenerateIdeas {
     }
 
     async start(context, personality) {
-        this.prompt = `Please suggest an idea based on the following topic: "${context.topic}". You will play the role of this personality: 
+        let prompt = `Please suggest an idea based on the following topic: "${context.topic}". You will play the role of this personality: 
         "${personality.name}", which has the following characteristics: "${personality.description}". You will respond in such a way that it 
         encapsulates the distinct essence of this character. Return only the idea without quotation marks.`;
-        this.execute(context.variants, context.maxTokens);
-    }
-
-    async execute(variants, maxTokens) {
+        let maxTokens;
+        let variants;
         if (!maxTokens) {
             maxTokens = 20;
         }
-        let alternativeTitles = await this.brainstorm(this.prompt, variants, maxTokens);
+        let llm = assistOS.space.getLLM();
+        let alternativeTitles = await llm.brainstorm(prompt, variants, maxTokens);
         try {
             this.return(JSON.parse(alternativeTitles));
         } catch (e) {

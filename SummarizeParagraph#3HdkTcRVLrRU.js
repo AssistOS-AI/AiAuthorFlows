@@ -9,12 +9,13 @@ export class SummarizeParagraph {
         let document = assistOS.space.getDocument(context.documentId);
         let chapter = document.getChapter(context.chapterId);
         let paragraph = chapter.getParagraph(context.paragraphId);
-        this.prompt = `${context.prompt || "Please summarize the following paragraph in a single idea:"} "${paragraph.text}". Return only the summary`;
-        await this.execute(context.maxTokens);
+        let prompt = `${context.prompt || "Please summarize the following paragraph in a single idea:"} "${paragraph.text}". Return only the summary`;
+        let llm = assistOS.space.getLLM();
+        let idea = await llm.request(prompt, context.maxTokens);
+        this.return(idea);
     }
 
     async execute(maxTokens) {
-        let idea = await this.request(this.prompt, maxTokens);
-        this.return(idea);
+
     }
 }
