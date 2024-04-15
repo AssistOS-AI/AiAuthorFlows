@@ -7,20 +7,20 @@ export class AddParagraph {
     };
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             let chapter = document.getChapter(context.chapterId);
-            let newParagraphId = system.services.generateId();
+            let newParagraphId = assistOS.services.generateId();
             let position = chapter.paragraphs.length;
 
-            if (system.space.currentParagraphId) {
-                position = chapter.getParagraphIndex(system.space.currentParagraphId) + 1;
+            if (assistOS.space.currentParagraphId) {
+                position = chapter.getParagraphIndex(assistOS.space.currentParagraphId) + 1;
             }
 
             await chapter.addParagraph({ id: newParagraphId, text: "" }, position);
-            await system.factories.updateDocument(system.space.id, document);
+            await assistOS.factories.updateDocument(assistOS.space.id, document);
 
-            system.space.currentParagraphId = newParagraphId;
-            system.space.currentChapterId = chapter.id;
+            assistOS.space.currentParagraphId = newParagraphId;
+            assistOS.space.currentChapterId = chapter.id;
 
             this.return(context.chapterId);
         } catch (e) {

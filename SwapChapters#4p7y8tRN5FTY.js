@@ -7,9 +7,9 @@ export class SwapChapters {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             if (document.swapChapters(context.chapterId1, context.chapterId2)) {
-                await system.factories.updateDocument(system.space.id, document);
+                await assistOS.factories.updateDocument(assistOS.space.id, document);
                 this.return(context.documentId);
             } else {
                 this.fail(`Unable to swap chapters. ${context.chapterId1}, ${context.chapterId2}`);

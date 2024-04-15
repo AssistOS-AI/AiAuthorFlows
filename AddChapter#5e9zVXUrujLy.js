@@ -10,16 +10,16 @@ export class AddChapter {
         }
 
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
 
             // Create chapter data
             let chapterData = {
                 title: context.title,
-                id: system.services.generateId(),
+                id: assistOS.services.generateId(),
                 paragraphs: [
                     {
                         text: "New Paragraph",
-                        id: system.services.generateId(),
+                        id: assistOS.services.generateId(),
                     },
                 ],
             };
@@ -27,9 +27,9 @@ export class AddChapter {
             let position = document.chapters.length;
 
             // Find the position to add the new chapter
-            if (system.space.currentChapterId) {
+            if (assistOS.space.currentChapterId) {
                 position = document.chapters.findIndex(
-                    (chapter) => chapter.id === system.space.currentChapterId
+                    (chapter) => chapter.id === assistOS.space.currentChapterId
                 ) + 1;
             }
 
@@ -37,8 +37,8 @@ export class AddChapter {
             await document.addChapter(chapterData, position);
 
             // Update current chapter and paragraph IDs in the user space
-            system.space.currentChapterId = chapterData.id;
-            system.space.currentParagraphId = chapterData.paragraphs[0].id;
+            assistOS.space.currentChapterId = chapterData.id;
+            assistOS.space.currentParagraphId = chapterData.paragraphs[0].id;
 
             this.return(context.title);
         } catch (e) {

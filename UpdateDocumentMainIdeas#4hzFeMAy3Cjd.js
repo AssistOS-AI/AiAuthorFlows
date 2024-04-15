@@ -7,7 +7,7 @@ export class UpdateDocumentMainIdeas {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             await document.setMainIdeas(context.ideas);
             this.return(context.ideas);
         } catch (e) {

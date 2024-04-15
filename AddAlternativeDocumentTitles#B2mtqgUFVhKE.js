@@ -7,7 +7,7 @@ export class AddAlternativeDocumentTitles {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             await document.addAlternativeTitles(context.selectedTitles);
             this.return(context.selectedTitles);
         } catch (e) {

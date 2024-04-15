@@ -6,7 +6,7 @@ export class SuggestChapterTitles {
     }
 
     start(context) {
-        let document = system.space.getDocument(context.documentId);
+        let document = assistOS.space.getDocument(context.documentId);
         let chapter = document.getChapter(context.chapterId);
         this.prompt = `${context.prompt || "Please suggest a title for this chapter"}: "${JSON.stringify(chapter.simplifyChapter())}". Return only the title without quotation marks.`;
         this.execute(document, chapter, context.titlesNr, context.maxTokens);

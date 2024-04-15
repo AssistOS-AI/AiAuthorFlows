@@ -6,7 +6,7 @@ export class SummarizeParagraph {
     }
 
     async start(context) {
-        let document = system.space.getDocument(context.documentId);
+        let document = assistOS.space.getDocument(context.documentId);
         let chapter = document.getChapter(context.chapterId);
         let paragraph = chapter.getParagraph(context.paragraphId);
         this.prompt = `${context.prompt || "Please summarize the following paragraph in a single idea:"} "${paragraph.text}". Return only the summary`;

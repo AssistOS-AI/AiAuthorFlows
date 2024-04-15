@@ -7,14 +7,14 @@ export class AcceptSuggestedParagraph {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             let chapter = document.getChapter(context.chapterId);
             let paragraph = chapter.getParagraph(context.paragraphId);
 
             paragraph.addAlternativeParagraph(context.alternativeParagraph);
 
-            await system.factories.updateDocument(
-                system.space.id,
+            await assistOS.factories.updateDocument(
+                assistOS.space.id,
                 document
             );
 

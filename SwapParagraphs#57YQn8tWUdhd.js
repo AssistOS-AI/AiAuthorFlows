@@ -7,12 +7,12 @@ export class SwapParagraphs {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             let chapter = document.getChapter(context.chapterId);
 
             if (chapter.swapParagraphs(context.paragraphId1, context.paragraphId2)) {
-                await system.factories.updateDocument(system.space.id, document);
-                system.space.currentParagraphId = context.paragraphId1;
+                await assistOS.factories.updateDocument(assistOS.space.id, document);
+                assistOS.space.currentParagraphId = context.paragraphId1;
             } else {
                 this.fail(`Unable to swap paragraphs. ${context.paragraphId1}, ${context.paragraphId2}, Chapter: ${context.chapterId}`);
             }

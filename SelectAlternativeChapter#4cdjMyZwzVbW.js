@@ -7,10 +7,10 @@ export class SelectAlternativeChapter {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             let chapter = document.getChapter(context.chapterId);
             chapter.selectAlternativeChapter(context.alternativeChapterId);
-            await system.factories.updateDocument(system.space.id, document);
+            await assistOS.factories.updateDocument(assistOS.space.id, document);
             this.return(context.alternativeChapterId);
         } catch (e) {
             this.fail(e);

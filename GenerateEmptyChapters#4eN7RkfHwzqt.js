@@ -6,7 +6,7 @@ export class GenerateEmptyChapters {
     }
 
     start(context) {
-        let document = system.space.getDocument(context.documentId);
+        let document = assistOS.space.getDocument(context.documentId);
         this.prompt = `${context.prompt || "Please generate chapter titles based on the following array of ideas"}: "${context.ideas}". Generate ${context.chaptersNr || "3"}. The response should have the following structure: {"titles":["chapter title 1", "chapter title 2", ... ,"chapter title n"]}.`;
         this.execute(document);
     }

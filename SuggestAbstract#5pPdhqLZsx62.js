@@ -6,7 +6,7 @@ export class SuggestAbstract {
     }
 
     start(context) {
-        let document = system.space.getDocument(context.documentId);
+        let document = assistOS.space.getDocument(context.documentId);
         this.prompt = `${context.prompt || "Please suggest an abstract for this document "}: ${JSON.stringify(
             document.simplifyDocument()
         )}. Return only the abstract text`;

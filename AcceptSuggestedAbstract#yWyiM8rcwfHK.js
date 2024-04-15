@@ -7,10 +7,10 @@ export class AcceptSuggestedAbstract {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             await document.addAlternativeAbstract({
-                content: system.UI.sanitize(context.abstract),
-                id: system.services.generateId()
+                content: assistOS.UI.sanitize(context.abstract),
+                id: assistOS.services.generateId()
             });
             this.return(context.abstract);
         } catch (e) {

@@ -7,10 +7,10 @@ export class DeleteAlternativeAbstract {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             document.deleteAlternativeAbstract(context.alternativeAbstractId);
-            await system.factories.updateDocument(
-                system.space.id,
+            await assistOS.factories.updateDocument(
+                assistOS.space.id,
                 document
             );
             this.return(context.alternativeAbstractId);

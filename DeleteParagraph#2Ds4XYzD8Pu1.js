@@ -8,10 +8,10 @@ export class DeleteParagraph {
     }
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             let chapter = document.getChapter(context.chapterId);
             chapter.deleteParagraph(context.paragraphId);
-            await system.factories.updateDocument(system.space.id, document);
+            await assistOS.factories.updateDocument(assistOS.space.id, document);
             this.return(context.paragraphId);
         } catch (e) {
             this.fail(e);

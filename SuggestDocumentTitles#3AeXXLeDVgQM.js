@@ -7,7 +7,7 @@ export class SuggestDocumentTitles {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             this.prompt = `${context.prompt || "Please suggest a title for a document, take into consideration these aspects of the document"}: "${JSON.stringify(document.simplifyDocument())}". Return only the title without quotation marks.`;
             this.execute(context.titlesNr, context.maxTokens);
         } catch (e) {

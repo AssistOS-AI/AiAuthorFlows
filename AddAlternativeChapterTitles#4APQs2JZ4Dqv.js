@@ -7,10 +7,10 @@ export class AddAlternativeChapterTitles {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             let chapter = document.getChapter(context.chapterId);
             chapter.addAlternativeTitles(context.titles);
-            await system.factories.updateDocument(system.space.id, document);
+            await assistOS.factories.updateDocument(assistOS.space.id, document);
             this.return(context.titles);
         } catch (e) {
             this.fail(e);

@@ -96,6 +96,6 @@ export class GenerateDocument {
             abstract: abstract
         };
 
-        await system.space.addDocument(documentData);
+        await assistOS.space.addDocument(documentData);
     }
 }

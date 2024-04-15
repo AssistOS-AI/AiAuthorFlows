@@ -7,7 +7,7 @@ export class SelectAlternativeAbstract {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             await document.selectAlternativeAbstract(context.alternativeAbstractId);
             this.return(context.alternativeAbstractId);
         } catch (e) {

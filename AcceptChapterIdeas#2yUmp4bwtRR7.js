@@ -6,10 +6,10 @@ export class AcceptChapterIdeas {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             let chapter = document.getChapter(context.chapterId);
-            await chapter.setMainIdeas(context.ideas.map(chapterIdea => system.UI.sanitize(chapterIdea)));
-            await system.factories.updateDocument(system.space.id, document);
+            await chapter.setMainIdeas(context.ideas.map(chapterIdea => assistOS.UI.sanitize(chapterIdea)));
+            await assistOS.factories.updateDocument(assistOS.space.id, document);
             this.return(context.ideas);
         } catch (e) {
             this.fail(e);

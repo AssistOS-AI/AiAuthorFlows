@@ -7,7 +7,7 @@ export class UpdateAlternativeAbstract {
 
     async start(context) {
         try {
-            let document = system.space.getDocument(context.documentId);
+            let document = assistOS.space.getDocument(context.documentId);
             await document.updateAlternativeAbstract(context.abstractId, context.text);
             this.return(context.abstractId);
         } catch (e) {
